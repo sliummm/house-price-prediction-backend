@@ -35,6 +35,10 @@ module.exports = class House {
         return db.execute('SELECT * FROM house_data');
     };
 
+    static fetchAData(id){
+        return db.execute('SELECT * FROM house_data WHERE id=?', [id]);
+    }
+
     static post(
             overallqual, 
             grlivarea,
@@ -48,17 +52,53 @@ module.exports = class House {
             saleprice
         )
         {
-            return db.execute('INSERT INTO house_data (overallqual, grlivarea, garagecars, totalbsmsf, fullbath, totrmsabvgrd, yearbuilt, yearremodadd, fireplaces, saleprice) VALUES (?)', [
-                overallqual, 
-                grlivarea,
-                garagecars,
-                totalbsmsf,
-                fullbath,
-                totrmsabvgrd,
-                yearbuilt,
-                yearremodadd,
-                fireplaces,
-                saleprice
-            ]);
+            return db.execute('INSERT INTO house_data (overallqual, grlivarea, garagecars, totalbsmsf, fullbath, totrmsabvgrd, yearbuilt, yearremodadd, fireplaces, saleprice) VALUES (?,?,?,?,?,?,?,?,?,?)', 
+                [
+                    overallqual, 
+                    grlivarea,
+                    garagecars,
+                    totalbsmsf,
+                    fullbath,
+                    totrmsabvgrd,
+                    yearbuilt,
+                    yearremodadd,
+                    fireplaces,
+                    saleprice
+                ]
+            );
         };
+
+    static update(
+        id,             
+        overallqual, 
+        grlivarea,
+        garagecars,
+        totalbsmsf,
+        fullbath,
+        totrmsabvgrd,
+        yearbuilt,
+        yearremodadd,
+        fireplaces,
+        saleprice)
+        {
+            return db.execute('UPDATE house_data SET overallqual=?, grlivarea=?, garagecars=?, totalbsmsf=?, fullbath=?, totrmsabvgrd=?, yearbuilt=?, yearremodadd=?, fireplaces=?, saleprice=? WHERE id=?',
+                [
+                    overallqual, 
+                    grlivarea,
+                    garagecars,
+                    totalbsmsf,
+                    fullbath,
+                    totrmsabvgrd,
+                    yearbuilt,
+                    yearremodadd,
+                    fireplaces,
+                    saleprice,
+                    id
+                ]
+            )
+        };
+
+    static delete(id){
+        return db.execute('DELETE FROM house_data WHERE id=?', [id]);
+    }
 };
