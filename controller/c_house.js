@@ -16,6 +16,18 @@ exports.getAllHouses = async (req, res, next) => {
     }
 };
 
+exports.getFirstHosue = async(req, res, next) =>{
+    try {
+        const [house] = await House.fetchFirst()
+        res.status(200).json(house);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        } 
+        next(err);
+    }
+}
+
 exports.getAHouse = async (req, res, next) => {
     try{
         const [house] = await House.fetchAData(req.params.id);

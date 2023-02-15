@@ -35,6 +35,10 @@ module.exports = class House {
         return db.execute('SELECT * FROM house_data');
     };
 
+    static fetchFirst(){
+        return db.execute('SELECT * FROM house_data LIMIT 1')
+    }
+
     static fetchAData(id){
         return db.execute('SELECT * FROM house_data WHERE id=?', [id]);
     }
