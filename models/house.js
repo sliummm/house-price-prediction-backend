@@ -55,6 +55,7 @@ module.exports = class House {
             fireplaces,
             saleprice
         )
+        
         {
             return db.execute('INSERT INTO house_data (overallqual, grlivarea, garagecars, totalbsmsf, fullbath, totrmsabvgrd, yearbuilt, yearremodadd, fireplaces, saleprice) VALUES (?,?,?,?,?,?,?,?,?,?)', 
                 [

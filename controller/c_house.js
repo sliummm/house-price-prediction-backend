@@ -41,6 +41,7 @@ exports.getAHouse = async (req, res, next) => {
 };
 
 exports.postAHouse = async (req, res, next) => {
+
     try {
         const postResponse = await House.post(
             req.body.overallqual, 
