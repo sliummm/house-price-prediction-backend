@@ -15,8 +15,12 @@ module.exports = class User{
         this.password = password;
     }
 
+    static fetchUserInfo(username){
+        return db.execute("SELECT * FROM users WHERE username=?", [username]);
+    }
+
     static fetchPassword(username){
-        return db.execute('SELECT password FROM users WHERE usernam=?', [username]);
+        return db.execute("SELECT password FROM users WHERE username=?", [username]);
     }
 
     static addUser(
@@ -25,7 +29,7 @@ module.exports = class User{
         company,
         password
     ){
-        return db.execute('INSERT INTO users (username, email, password) VALUES (?,?,?)', [username, email, company, password]);
+        return db.execute('INSERT INTO users (username, email, company, password) VALUES (?,?,?,?)', [username, email, company, password]);
     }
 
     static updateUser(

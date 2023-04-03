@@ -2,6 +2,8 @@ const express = require('express');
 const userController = require('../controller/c_user');
 const router = express.Router();
 
-router.get('/getpass/:username', userController.getPassWord)
-router.post('/postuser', userController.postUser)
-router.put('/putuser/:uid', userController.putUser)
+router.get('/:username', userController.getPassWord);
+router.get('/userinfo/:username', userController.getUserInfo);
+router.post('/', userController.postUser);
+router.put('/:uid', userController.putUser);
+module.exports = router;

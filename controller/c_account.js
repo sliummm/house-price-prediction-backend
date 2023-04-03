@@ -2,7 +2,7 @@ const  Account = require('../models/account');
 
 exports.getAllAccounts = async (req,res,next)=>{
     try {
-        const [allAccounts] = await Account.fetchAll(req.params.userid);
+        const [allAccounts] = await Account.fetchAll(req.params.uid);
         res.status(200).json(allAccounts)
     } catch (err) {
         if (!err.statusCode) {
