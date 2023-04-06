@@ -15,21 +15,12 @@ module.exports = class User{
         this.password = password;
     }
 
-    static fetchUserInfo(username){
-        return db.execute("SELECT * FROM users WHERE username=?", [username]);
+    static find(email){
+        return db.execute("SELECT * FROM users WHERE email=?", [email]);
     }
 
-    static fetchPassword(username){
-        return db.execute("SELECT password FROM users WHERE username=?", [username]);
-    }
-
-    static addUser(
-        username,
-        email,
-        company,
-        password
-    ){
-        return db.execute('INSERT INTO users (username, email, company, password) VALUES (?,?,?,?)', [username, email, company, password]);
+    static save(user){
+        return db.execute('INSERT INTO users (username, email, password, company) VALUES (?,?,?,?)', [user.username, user.email, user.password, user.company]);
     }
 
     static updateUser(

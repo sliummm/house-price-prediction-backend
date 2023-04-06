@@ -1,22 +1,20 @@
 const User = require('../models/user');
 
+exports.userLogin = async (req,res,next)=>{
+    try {
+        const [user] = await User.uservalidation(req.body.username, req.body.password);
+        res.status(200).json(user)
+        //TO-DO
+    } catch (err) {
+        
+    }
+}
+
 exports.getUserInfo = async (req,res,next) =>{
     try {
         const [user] = await User.fetchUserInfo(req.params.username);
         res.status(200).json(user)
     } catch (err) {
-        if (!err.statusCode) {
-            err.statusCode = 500
-        } 
-        next(err);
-    }
-}
-
-exports.getPassWord = async (req, res, next) =>{
-    try{
-        const [password] = await User.fetchPassword(req.params.username);
-        res.status(200).json(password);
-    } catch(err){
         if (!err.statusCode) {
             err.statusCode = 500
         } 
