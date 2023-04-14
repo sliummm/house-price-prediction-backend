@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator')
 const db = require('../util/database_code');
 
 module.exports = class Account{
@@ -26,24 +27,25 @@ module.exports = class Account{
         return db.execute('select * FROM accounts WHERE aid=?;', [aid])
     }
 
-    static addAccount(
-        userid,
-        account_type,
-        account_username,
-        account_password,
-        account_comment
-    ){
-        return db.execute('INSERT INTO accounts (userid, account_type, account_username, account_password, account_comment) VALUES (?,?,?,?,?);', [userid, account_type, account_username, account_password, account_comment])
+    static addAccount(account){
+        return db.execute('INSERT INTO accounts (userid, account_type, account_username, account_password, account_comment) VALUES (?,?,?,?,?);', 
+        [
+            account.userid, 
+            account.account_type, 
+            account.account_username, 
+            account.account_password, 
+            account.account_comment
+        ])
     }
 
-    static updateAccount(
-        aid,
-        account_type,
-        account_username,
-        account_password,
-        account_comment
-    ){
-        return db.execute('UPDATE accounts SET account_type=?, account_username=?,account_password=?,account_comment=? WHERE aid=?;', [account_type,account_username,account_password,account_comment,aid]);
+    static updateAccount(account){
+        return db.execute('UPDATE accounts SET account_type=?, account_username=?,account_password=?,account_comment=? WHERE aid=?;', 
+        [
+            account.account_type,
+            account.account_username,
+            account.account_password,
+            account.account_comment,
+            account.aid]);
     }
 
     static deleteAccount(aid){

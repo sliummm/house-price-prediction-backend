@@ -77,7 +77,7 @@ exports.login = async(req,res,next)=>{
             }
         )
 
-        res.status(200).json({ token: token, uid: storedUser.uid });
+        res.status(200).json({ token: token, user:storedUser });
 
     } catch (err) {
         if (!err.statusCode) {
