@@ -7,14 +7,14 @@ router.get('/:uid', accountController.getAllAccounts);
 router.get('/useraccount/:aid',accountController.getAccountById);
 router.post('/', 
     [
-        body('account_username').not().isEmpty(),
-        body('account_password').not().isEmpty()
+        body('account_username').trim().not().isEmpty(),
+        body('account_password').trim().not().isEmpty()
     ],
     accountController.postAccount);
-router.put(':aid', 
+router.put('/:aid', 
     [
-        body('account_username').not().isEmpty(),
-        body('account_password').not().isEmpty()
+        body('account_username').trim().not().isEmpty(),
+        body('account_password').trim().not().isEmpty()
     ],
     accountController.putAccount);
 router.delete('/:aid', accountController.deleteAccount);

@@ -49,6 +49,7 @@ module.exports = class Account{
     }
 
     static deleteAccount(aid){
+        console.log(aid)
         return db.execute('DELETE FROM accounts WHERE aid=?',[aid]);
     }
 }

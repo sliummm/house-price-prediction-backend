@@ -15,6 +15,7 @@ exports.getAllAccounts = async (req,res,next)=>{
 
 exports.getAccountById = async (req,res,next)=>{
     try {
+        console.log(req.params)
         const [account] = await Account.fetchById(req.params.aid);
         res.status(200).json(account)
     } catch (err) {
@@ -27,7 +28,9 @@ exports.getAccountById = async (req,res,next)=>{
 
 exports.postAccount = async (req,res,next) => {
     const errors = validationResult(req);
+    console.log(req.body);
     if (!errors.isEmpty()) return;
+    console.log(errors);
 
     const userid = req.body.userid;
     const account_type = req.body.account_type;
@@ -44,7 +47,7 @@ exports.postAccount = async (req,res,next) => {
             account_comment:account_comment
         }
         const postResponse = await Account.addAccount(account);
-        res.status(200).json(postResponse);
+        res.status(200).json({message:'Account added'});
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500
@@ -55,14 +58,16 @@ exports.postAccount = async (req,res,next) => {
 
 exports.putAccount = async (req,res,next) => {
     try {
-        const putResponse = await Account.updateAccount(
-            req.body.aid,
-            req.body.account_type,
-            req.body.account_username,
-            req.body.account_password,
-            req.body.account_comment
-        )
-        res.status(200).json(putResponse);
+        const account = {
+            aid: req.body.aid,
+            account_type:req.body.account_type,
+            account_username:req.body.account_username,
+            account_password:req.body.account_password,
+            account_comment:req.body.account_comment
+        }
+        console.log(req.body)
+        const putResponse = await Account.updateAccount(account)
+        res.status(200).json({message:'Account updated'});
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500
@@ -73,8 +78,8 @@ exports.putAccount = async (req,res,next) => {
 
 exports.deleteAccount = async (req,res,next)=>{
     try {
-        const deleteResponse = await Account.deleteAccount(req.parames.aid);
-        res.status(200).json(deleteResponse);
+        const deleteResponse = await Account.deleteAccount(req.params.aid);
+        res.status(200).json({message:"Account Deleted"});
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500
