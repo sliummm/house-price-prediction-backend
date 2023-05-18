@@ -1,7 +1,7 @@
 FROM node:latest
 LABEL author="Shu Liu"
 
-ENV PORT=3000
+ENV PORT=4242
 
 COPY . /var/express
 WORKDIR /var/express

@@ -1,5 +1,5 @@
 {
-    "host": "localhost",
+    "host": "host.docker.internal",
     "user": "root",
     "database": "ml_db",
     "password": "70palomino"
